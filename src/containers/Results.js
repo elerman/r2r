@@ -10,7 +10,7 @@ class Results extends React.Component {
   render() {
     if(this.props.results){
         const list = this.props.results.routes.map((route,index)=>{
-            return <li key={index}><R2Route route={route}/></li>
+            return <li key={index}><R2Route route={route} results={this.props.results}/></li>
         })
 
         return <ul>{list}</ul>

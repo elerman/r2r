@@ -15,7 +15,7 @@ class R2Route extends React.Component {
 
   render() {
     const route = this.props.route
-    const details = this.state.details? <R2RDetails route={route}/>:null
+    const details = this.state.details? <R2RDetails route={route} results={this.props.results}/>:null
     return (
       <div className="r2r-route">
         <a src="#" onClick={(evt)=>{this.handleRouteLink(evt)}}>{route.name} - ({route.indicativePrices[0].priceLow} - {route.indicativePrices[0].priceHigh})</a>
