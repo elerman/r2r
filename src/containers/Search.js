@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {search} from '../actions/index'
 
+import R2RAutocomplete from '../components/R2RAutocomplete'
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +28,7 @@ class Search extends React.Component {
             <form className="form-inline" onSubmit={this.handleSubmit}>
                 <input type="text" className="form-control" placeholder="from" value={this.state.oName} onChange={(evt)=>{this.handleSearch(evt,'oName')}} />
                 <input type="text" className="form-control" placeholder="to" value={this.state.dName} onChange={(evt)=>{this.handleSearch(evt,'dName')}} />
+                <R2RAutocomplete />
                 <button type="submit">Find</button>
             </form>
         )

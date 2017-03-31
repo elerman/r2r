@@ -3,7 +3,6 @@ import React from 'react';
 class R2RPlace extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { someKey: 'someValue' };
   }
 
   render() {
