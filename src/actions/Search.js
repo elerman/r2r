@@ -12,3 +12,8 @@ export const search = (oName, dName)=>{
         .then(json => dispatch(results(json)))
     }
 }
+
+export const SEARCH_PARAM = 'SEARCH_PARAM'
+export const searchParam = (place, ref) => {
+    return {type: SEARCH_PARAM, place: place, reference: ref}
+}

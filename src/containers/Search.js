@@ -2,9 +2,9 @@ import React from 'react';
 
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {search} from '../actions/index'
 
-import R2RAutocomplete from '../components/R2RAutocomplete'
+import R2RAutocomplete from './R2RAutocomplete'
+import R2RPlace from '../components/R2RPlace'
 
 class Search extends React.Component {
     constructor(props) {
@@ -23,22 +23,28 @@ class Search extends React.Component {
         this.setState({ [attr]: evt.target.value })
     }
 
+
     render() {
+
+        const origin = this.props.oPlace ? <R2RPlace place={this.props.oPlace} />:null
+        const destination = this.props.dPlace ? <R2RPlace place={this.props.dPlace} />:null
+
         return (
             <form className="form-inline" onSubmit={this.handleSubmit}>
-                <input type="text" className="form-control" placeholder="from" value={this.state.oName} onChange={(evt)=>{this.handleSearch(evt,'oName')}} />
-                <input type="text" className="form-control" placeholder="to" value={this.state.dName} onChange={(evt)=>{this.handleSearch(evt,'dName')}} />
-                <R2RAutocomplete />
-                <button type="submit">Find</button>
+                <R2RAutocomplete param="oPlace"/>
+                <R2RAutocomplete param="dPlace"/>
+                {origin}
+                {destination}
             </form>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({
-        find: search
-    }, dispatch)
+const mapStateToProps = (state, ownProps) => {
+    return {
+        oPlace: state.searchReducer.oPlace,
+        dPlace: state.searchReducer.dPlace
+    }
 }
 
-export default connect(null,mapDispatchToProps)(Search);
+export default connect(mapStateToProps)(Search)

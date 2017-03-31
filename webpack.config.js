@@ -8,7 +8,9 @@ module.exports = {
   entry: {app:'./app.js'},
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    modules:['node_modules','bower_components'],
+    descriptionFiles: ['package.json', 'bower.json']
   },
   output: {
     filename: '[name].[hash].bundle.js',
@@ -42,5 +44,6 @@ module.exports = {
     filename: 'index.html'
   }),
   new webpack.HotModuleReplacementPlugin(),
-  new CleanWebpackPlugin(['dist'])]
+  new CleanWebpackPlugin(['dist'])
+  ]
 };

@@ -1,9 +1,7 @@
 import React from 'react';
-import css from './app.less'
+import css from '../styles/app.less'
 
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {someAction} from '../actions/index'
 import Search from './Search'
 import Results from './Results'
 

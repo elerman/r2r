@@ -1,16 +1,6 @@
-import * as ACTIONS from '../actions/index'
+import {combineReducers} from 'redux'
+import searchReducer from './Search'
 
-const initialState = {
-    results: null
-}
+const reducers = combineReducers({searchReducer})
 
-export const appReducer = (state = initialState, action)=>{
-    switch(action.type){
-        case ACTIONS.RESULTS:
-            console.log(action.results)
-            return Object.assign({},state,{results : action.results});
-        break;
-        default:
-            return state;
-    }
-}
+export default reducers
