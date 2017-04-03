@@ -59,6 +59,11 @@ class R2RAutocomplete extends Component {
         })
     }
 
+    componentWillUnmount() {
+        let ji = jquery(this.input)
+        ji.typeahead('destroy')
+    }
+
     render() {
         return (
             <div className={css.r2rAutocomplete}>

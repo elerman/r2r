@@ -1,0 +1,21 @@
+{
+  "name": "r2r",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Ezequiel <ezequiel.lerman@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/elerman/r2r",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "typeahead.js": "^0.11.1"
+  }
+}

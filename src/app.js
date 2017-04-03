@@ -12,10 +12,10 @@ import Results from './containers/Results'
 import {Router, Route, browserHistory} from 'react-router'
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
 
-const history = syncHistoryWithStore(browserHistory, store)
-const middleware = routerMiddleware(browserHistory)
 
+const middleware = routerMiddleware(browserHistory)
 const store = createStore(reducers, applyMiddleware(thunk, middleware));
+const history = syncHistoryWithStore(browserHistory, store)
 
 render(
     (

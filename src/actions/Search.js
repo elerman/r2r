@@ -1,3 +1,5 @@
+import {push} from 'react-router-redux'
+
 export const RESULTS = 'RESULTS'
 const results = (results)=>{
     return {type:RESULTS, results}
@@ -14,7 +16,7 @@ export const search = (oPlace, dPlace)=>{
         .then(response => response.json())
         .then(json => {
             dispatch(results(json))
-            dispatch()
+            dispatch(push('/results'))
         })
     }
 }
