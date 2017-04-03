@@ -25,18 +25,26 @@ class Search extends React.Component {
 
         const origin = this.props.oPlace ? <R2RPlace place={this.props.oPlace} />:null
         const destination = this.props.dPlace ? <R2RPlace place={this.props.dPlace} />:null
-        const submit = this.props.oPlace && this.props.dPlace ? <input type="submit" /> : null
+        const submit = this.props.oPlace && this.props.dPlace ? (
+            <div className="form-group">
+                <button type="submit" className="btn btn-primary">Find!</button>
+            </div>
+        ): null
         const loader = this.props.loading ? <Loader />: null
         return (
             <section className={css.search}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <R2RAutocomplete param="oPlace"/>
+                        <R2RAutocomplete param="oPlace" placeholder="Origin location"/>
                     </div>
                     <div className="form-group">
-                        <R2RAutocomplete param="dPlace"/>
+                        <R2RAutocomplete param="dPlace" placeholder="Your destination"/>
                     </div>
+                    {submit}
                 </form>
+                {origin}
+                {destination}
+                {loader}
             </section>
         )
     }

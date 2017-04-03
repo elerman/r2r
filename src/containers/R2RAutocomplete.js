@@ -46,7 +46,7 @@ class R2RAutocomplete extends Component {
         let ji = jquery(this.input)
         this.startBloodhound(() => {
             ji.typeahead(null, {
-                name: 'r2r',
+                name: 'r2r-suggestions',
                 display: (val) => {
                     return val.shortName
                 },
@@ -61,9 +61,11 @@ class R2RAutocomplete extends Component {
 
     render() {
         return (
-            <div className="r2r-autocomplete">
+            <div className={css.r2rAutocomplete}>
                 <input
                     type="text"
+                    className="form-control"
+                    placeholder={this.props.placeholder}
                     ref={(input) => {
                     this.input = input
                 }}/>

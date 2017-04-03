@@ -16,8 +16,8 @@ class App extends React.Component {
 
     return (
       <section className={style}>
-        <div className="row align-items-center">
-          <div className="col col-sm-5">
+        <div className="row justify-content-center">
+          <div className="col col-md-6">
             <Search/>
           </div>
         </div>
