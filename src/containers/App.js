@@ -11,8 +11,11 @@ class App extends React.Component {
   }
 
   render() {
+
+    let style = css.app + ' row justify-content-center'
+
     return (
-      <section className="app row justify-content-center">
+      <section className={style}>
         <div className="col-md">
           <Search />
           <Results />

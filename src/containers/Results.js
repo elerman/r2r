@@ -20,7 +20,7 @@ class Results extends React.Component {
 
 const mapStateToProps = (state)=> {
     return {
-        results : state.results
+        results : state.searchReducer.results
     }
 }
 
