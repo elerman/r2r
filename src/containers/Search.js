@@ -32,20 +32,25 @@ class Search extends React.Component {
         ): null
         const loader = this.props.loading ? <Loader />: null
         return (
-            <section className={css.search}>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <R2RAutocomplete param="oPlace" placeholder="Origin location"/>
-                    </div>
-                    <div className="form-group">
-                        <R2RAutocomplete param="dPlace" placeholder="Your destination"/>
-                    </div>
-                    {submit}
-                </form>
-                {origin}
-                {destination}
-                {loader}
-            </section>
+
+            <div className="row justify-content-center">
+                <div className="col col-md-6">
+                    <section className={css.search}>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <R2RAutocomplete param="oPlace" placeholder="Origin location"/>
+                            </div>
+                            <div className="form-group">
+                                <R2RAutocomplete param="dPlace" placeholder="Your destination"/>
+                            </div>
+                            {submit}
+                        </form>
+                        {origin}
+                        {destination}
+                        {loader}
+                    </section>  
+                </div>
+            </div>
         )
     }
 }

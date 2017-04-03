@@ -13,7 +13,12 @@ class Results extends React.Component {
             return <li key={index}><R2Route route={route} results={this.props.results}/></li>
         })
 
-        return <ul>{list}</ul>
+        return (<div className="row">
+          <div className="col col-md">
+            <ul>{list}</ul>
+          </div>
+        </div>)
+        
     }else return null
   }
 }

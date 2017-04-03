@@ -16,16 +16,7 @@ class App extends React.Component {
 
     return (
       <section className={style}>
-        <div className="row justify-content-center">
-          <div className="col col-md-6">
-            <Search/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col col-md">
-            <Results/>
-          </div>
-        </div>
+        {this.props.children}
       </section>
     );
   }

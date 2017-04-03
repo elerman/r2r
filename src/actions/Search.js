@@ -12,7 +12,10 @@ export const search = (oPlace, dPlace)=>{
         let api = `http://free.rome2rio.com/api/1.4/json/Search?key=xeOAhXI4&oName='${oname}'&dName=${dname}`
         return fetch(api)
         .then(response => response.json())
-        .then(json => dispatch(results(json)))
+        .then(json => {
+            dispatch(results(json))
+            dispatch()
+        })
     }
 }
 

@@ -36,7 +36,10 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     port: 3000,
     hot: true,
-    lazy: false
+    lazy: false,
+    historyApiFallback: {
+      index: '/'
+    }
   },
   plugins: [new HtmlWebpackPlugin({
     title: "React webpack test",
