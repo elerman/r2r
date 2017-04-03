@@ -8,6 +8,8 @@ import R2RAutocomplete from './R2RAutocomplete'
 import R2RPlace from '../components/R2RPlace'
 import Loader from '../components/Loader'
 
+import css from '../styles/search.less'
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -26,14 +28,16 @@ class Search extends React.Component {
         const submit = this.props.oPlace && this.props.dPlace ? <input type="submit" /> : null
         const loader = this.props.loading ? <Loader />: null
         return (
-            <form className="form-inline" onSubmit={this.handleSubmit}>
-                <R2RAutocomplete param="oPlace"/>
-                <R2RAutocomplete param="dPlace"/>
-                {origin}
-                {destination}
-                {submit}
-                {loader}
-            </form>
+            <section className={css.search}>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <R2RAutocomplete param="oPlace"/>
+                    </div>
+                    <div className="form-group">
+                        <R2RAutocomplete param="dPlace"/>
+                    </div>
+                </form>
+            </section>
         )
     }
 }
