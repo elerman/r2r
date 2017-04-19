@@ -1,6 +1,8 @@
 import React from 'react';
 import R2RDetails from './R2RDetails'
 
+import {Link} from 'react-router'
+
 class R2Route extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ class R2Route extends React.Component {
   }
 
   handleRouteLink(evt){
-    evt.preventDefault()
+    //evt.preventDefault()
     this.setState({details:!this.state.details})
   }
 
@@ -17,10 +19,12 @@ class R2Route extends React.Component {
     const route = this.props.route
     const details = this.state.details? <R2RDetails route={route} results={this.props.results}/>:null
     return (
-      <div className="r2r-route">
-        <a src="#" onClick={(evt)=>{this.handleRouteLink(evt)}}>{route.name} - ({route.indicativePrices[0].priceLow} - {route.indicativePrices[0].priceHigh})</a>
-        {details}
-      </div>
+      <Link to={`/r/${route.name}`}>
+        <div className="r2r-route">
+            <div onClick={(evt)=>{this.handleRouteLink(evt)}}>{route.name} - ({route.indicativePrices[0].priceLow} - {route.indicativePrices[0].priceHigh})</div>
+          {details}
+        </div>
+      </Link>
     );
   }
 

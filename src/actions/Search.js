@@ -16,7 +16,7 @@ export const search = (oPlace, dPlace)=>{
         .then(response => response.json())
         .then(json => {
             dispatch(results(json))
-            dispatch(push('/results'))
+            dispatch(push(`/results/${oname}/${dname}`))
         })
     }
 }

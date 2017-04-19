@@ -10,14 +10,20 @@ class Results extends React.Component {
   render() {
     if(this.props.results){
         const list = this.props.results.routes.map((route,index)=>{
-            return <li key={index}><R2Route route={route} results={this.props.results}/></li>
+            return (<li key={index}>
+                <R2Route route={route} results={this.props.results}/>
+              </li>)
         })
 
-        return (<div className="row">
-          <div className="col col-md">
-            <ul>{list}</ul>
+        return (
+          <div className="row">
+            <div className="col col-md-4" classID="sidebar">
+              <ul>{list}</ul>
+            </div>
+            <div className="col col-md-8" classID="main-display">
+            </div>
           </div>
-        </div>)
+        )
         
     }else return null
   }

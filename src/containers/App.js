@@ -3,7 +3,6 @@ import css from '../styles/app.less'
 
 import {connect} from 'react-redux'
 import Search from './Search'
-import Results from './Results'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class App extends React.Component {
 
   render() {
 
-    let style = css.app + ' container'
+    let style = css.app + ' col-md-12'
 
     return (
       <section className={style}>
