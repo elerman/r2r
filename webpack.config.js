@@ -5,16 +5,23 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: {app:'./app.js'},
+  entry: {
+    app: './app.js'
+  },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules:['node_modules','bower_components'],
+    extensions: [
+      '.js', '.jsx'
+    ],
+    modules: [
+      'node_modules', 'bower_components'
+    ],
     descriptionFiles: ['package.json', 'bower.json']
   },
   output: {
     filename: '[name].[hash].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -25,10 +32,9 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
-      },
-      {
+      }, {
         test: /.less$/,
-        loader: ['style-loader','css-loader', 'less-loader']
+        loader: ['style-loader', 'css-loader', 'less-loader']
       }
     ]
   },
@@ -37,16 +43,30 @@ module.exports = {
     port: 3000,
     hot: true,
     lazy: false,
-    historyApiFallback: {
+/*    historyApiFallback: {
       index: '/'
+    },*/
+    proxy: {
+      '/**': { //catch all requests
+        target: '/index.html', //default target
+        secure: false,
+        bypass: function (req, res, opt) {
+          // your custom code to check for any exceptions console.log('bypass check', {req:
+          // req, res:res, opt: opt});
+          if (req.path.indexOf('/img/') !== -1 || req.path.indexOf('/public/') !== -1) {
+            return '/'
+          }
+
+          if (req.headers.accept.indexOf('html') !== -1) {
+            return '/index.html';
+          }
+        }
+      }
     }
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: "React webpack test",
-    template: 'index.html',
-    filename: 'index.html'
-  }),
-  new webpack.HotModuleReplacementPlugin(),
-  new CleanWebpackPlugin(['dist'])
+  plugins: [
+    new HtmlWebpackPlugin({title: "React webpack test", template: 'index.html', filename: 'index.html'}),
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['dist'])
   ]
 };

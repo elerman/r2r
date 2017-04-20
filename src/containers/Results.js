@@ -1,6 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import R2Route from '../components/R2Route'
+import {bindActionCreators} from 'redux'
+
+import Loader from '../components/Loader'
+
+import {getResults} from '../actions/Search'
 
 class Results extends React.Component {
   constructor(props) {
@@ -25,14 +30,36 @@ class Results extends React.Component {
           </div>
         )
         
-    }else return null
+    }else{
+      const loader = this.props.loading ? <Loader />: null
+      return (<div>{loader}</div>)
+    } 
   }
+
+  componentWillMount() {
+    if(this.props.oPlace && this.props.dPlace){
+      this.props.getResults(this.props.oPlace, this.props.dPlace)
+    }else if(this.props.params){
+      this.props.getResults(this.props.params.oName, this.props.params.dName)
+    }
+  }
+
 }
 
-const mapStateToProps = (state)=> {
+const mapStateToProps = (state, ownProps)=> {
     return {
-        results : state.searchReducer.results
+        results : state.searchReducer.results,
+        loading: state.searchReducer.loading, 
+        params: ownProps.params,
+        oPlace: state.searchReducer.oPlace,
+        dPlace: state.searchReducer.dPlace
     }
 }
 
-export default connect(mapStateToProps)(Results);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    getResults: getResults
+  }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

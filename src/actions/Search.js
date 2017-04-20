@@ -1,4 +1,6 @@
 import {push} from 'react-router-redux'
+import {store} from '../app'
+import _ from 'underscore'
 
 export const RESULTS = 'RESULTS'
 const results = (results)=>{
@@ -6,11 +8,19 @@ const results = (results)=>{
 }
 
 export const SEARCH = 'SEARCH'
-export const search = (oPlace, dPlace)=>{
+export const search = ()=>{
+    store.dispatch(push('/results'))
+    return {type: SEARCH}
+}
+
+export const GET_RESULTS = "GET_RESULTS"
+export const getResults = (oPlace, dPlace)=>{
     return (dispatch)=>{
         dispatch(loading)
-        let oname = oPlace.shortName.replace(/ *\([^)]*\) */g, "")
-        let dname = dPlace.shortName.replace(/ *\([^)]*\) */g, "")
+        
+        let oname = _.isObject(oPlace) ? oPlace.shortName.replace(/ *\([^)]*\) */g, ""): oPlace
+        let dname = _.isObject(dPlace) ? dPlace.shortName.replace(/ *\([^)]*\) */g, ""): dPlace
+
         let api = `http://free.rome2rio.com/api/1.4/json/Search?key=xeOAhXI4&oName='${oname}'&dName=${dname}`
         return fetch(api)
         .then(response => response.json())

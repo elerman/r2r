@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {search} from '../actions/Search'
 import R2RAutocomplete from './R2RAutocomplete'
 import R2RPlace from '../components/R2RPlace'
-import Loader from '../components/Loader'
+
 
 import css from '../styles/search.less'
 
@@ -18,7 +18,7 @@ class Search extends React.Component {
 
     handleSubmit(evt) {
         evt.preventDefault()
-        this.props.search(this.props.oPlace, this.props.dPlace)
+        this.props.search()
     }
 
     render() {
@@ -30,7 +30,7 @@ class Search extends React.Component {
                 <button type="submit" className="btn btn-primary">Find!</button>
             </div>
         ): null
-        const loader = this.props.loading ? <Loader />: null
+        
         return (
 
             <div className="row justify-content-center">
@@ -47,7 +47,6 @@ class Search extends React.Component {
                         </form>
                         {origin}
                         {destination}
-                        {loader}
                     </section>  
                 </div>
             </div>
@@ -58,8 +57,7 @@ class Search extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         oPlace: state.searchReducer.oPlace,
-        dPlace: state.searchReducer.dPlace,
-        loading: state.searchReducer.loading
+        dPlace: state.searchReducer.dPlace
     }
 }
 
