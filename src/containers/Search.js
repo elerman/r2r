@@ -3,7 +3,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
-import {search} from '../actions/Search'
+import {fireSearch} from '../actions/Search'
 import R2RAutocomplete from './R2RAutocomplete'
 import R2RPlace from '../components/R2RPlace'
 
@@ -63,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators({
-        search: search
+        search: fireSearch
     }, dispatch)
 }
 

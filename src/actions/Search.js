@@ -7,10 +7,16 @@ const results = (results)=>{
     return {type:RESULTS, results}
 }
 
-export const SEARCH = 'SEARCH'
-export const search = ()=>{
+export const FIRE_SEARCH = 'FIRE_SEARCH'
+export const fireSearch = ()=>{
     store.dispatch(push('/results'))
-    return {type: SEARCH}
+    return {type: FIRE_SEARCH}
+}
+
+export const GO_SEARCH = 'GO_SEARCH'
+export const goSearch = ()=>{
+    store.dispatch(push('/search'))
+    return {type: GO_SEARCH}
 }
 
 export const GET_RESULTS = "GET_RESULTS"
@@ -23,10 +29,15 @@ export const getResults = (oPlace, dPlace)=>{
 
         let api = `http://free.rome2rio.com/api/1.4/json/Search?key=xeOAhXI4&oName='${oname}'&dName=${dname}`
         return fetch(api)
-        .then(response => response.json())
-        .then(json => {
-            dispatch(results(json))
-            dispatch(push(`/results/${oname}/${dname}`))
+        .then(response => {
+            if(!response.ok){
+                dispatch(push('/404'))
+            }else
+                response.json()
+                .then(json => {
+                    dispatch(results(json))
+                    dispatch(push(`/results/${oname}/${dname}`))
+                })
         })
     }
 }

@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux'
 
 import Loader from '../components/Loader'
 
-import {getResults} from '../actions/Search'
+import {getResults, goSearch} from '../actions/Search'
 
 class Results extends React.Component {
   constructor(props) {
@@ -40,7 +40,10 @@ class Results extends React.Component {
     if(this.props.oPlace && this.props.dPlace){
       this.props.getResults(this.props.oPlace, this.props.dPlace)
     }else if(this.props.params){
-      this.props.getResults(this.props.params.oName, this.props.params.dName)
+      if(!this.props.params.oName || !this.props.params.dName) {
+        this.props.goSearch()
+      }else
+        this.props.getResults(this.props.params.oName, this.props.params.dName)
     }
   }
 
@@ -58,7 +61,8 @@ const mapStateToProps = (state, ownProps)=> {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getResults: getResults
+    getResults: getResults,
+    goSearch: goSearch
   }, dispatch)
 };
 
