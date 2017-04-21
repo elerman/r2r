@@ -23,11 +23,11 @@ class Results extends React.Component {
 
         return (
           <div className="row">
-            <div className="col col-md-4" classID="sidebar">
+            <div className="col col-md-4" id="sidebar">
               <ul>{list}</ul>
             </div>
-            <div className="col col-md-8" classID="main-display">
-              <Leaflet />
+            <div className="col col-md-8" id="main-display">
+              <Leaflet results={this.props.results}/>
             </div>
           </div>
         )
