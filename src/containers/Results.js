@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import R2Route from '../components/R2Route'
 import {bindActionCreators} from 'redux'
 
+import R2Route from '../components/R2Route'
 import Loader from '../components/Loader'
+import Leaflet from '../components/Leaflet'
 
 import {getResults, goSearch} from '../actions/Search'
 
@@ -26,6 +27,7 @@ class Results extends React.Component {
               <ul>{list}</ul>
             </div>
             <div className="col col-md-8" classID="main-display">
+              <Leaflet />
             </div>
           </div>
         )
