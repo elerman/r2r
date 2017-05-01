@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import jquery from 'jquery'
 import L from 'leaflet'
+import PolylineEncoded from 'polyline-encoded'
 import css from '../styles/map.less'
 
 import _ from 'underscore'
@@ -9,8 +10,9 @@ class Leaflet extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {initialized: false, map: null }
+        this.state = {initialized: false, map: null, }
         this.layers = []
+        this.PolylineEncoded = PolylineEncoded
     }
 
     componentDidUpdate() {
@@ -52,22 +54,34 @@ class Leaflet extends Component {
             var coords = []
 
             for(let s in route.segments){
-                let or = [this.props.results.places[route.segments[s].depPlace].lat, this.props.results.places[route.segments[s].depPlace].lng]
-                let des = [this.props.results.places[route.segments[s].arrPlace].lat, this.props.results.places[route.segments[s].arrPlace].lng]
-                coords.push(or)
-                coords.push(des)
 
-                let orm = L.marker(or).addTo(map)
-                let desm = L.marker(des).addTo(map)
+                let segment = route.segments[s]
 
-                this.layers = [orm,desm, ...this.layers]
+                if(segment.path){
+                    let decoded = PolylineEncoded.decode(segment.path)
+                    let polyline = L.polyline(decoded,{color: "#2BDA37", noClip: true}).addTo(map)
+
+                    let orm = L.marker(decoded[0]).addTo(map)
+                    let desm = L.marker(decoded[decoded.length-1]).addTo(map)
+
+                    coords = [...coords, ...decoded]
+                    this.layers = [orm,desm, polyline, ...this.layers]
+                }else{
+                
+                    let or = [this.props.results.places[segment.depPlace].lat, this.props.results.places[segment.depPlace].lng]
+                    let des = [this.props.results.places[segment.arrPlace].lat, this.props.results.places[segment.arrPlace].lng]
+                    coords.push(or)
+                    coords.push(des)
+
+                    let orm = L.marker(or).addTo(map)
+                    let desm = L.marker(des).addTo(map)
+
+                    let polyline = L.polyline([or,des], {color: "#00B6CC", noClip: true}).addTo(map)
+
+                    this.layers = [orm,desm,polyline, ...this.layers]
+                }
             }
-
-            let pl = L.polyline(coords, {color: "blue", noClip: true}).addTo(map)
-            map.fitBounds(pl.getBounds())
-
-            this.layers.push(pl)
-
+            map.fitBounds(coords)
         }
 
         if (!this.props.route) 
