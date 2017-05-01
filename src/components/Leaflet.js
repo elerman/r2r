@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import jquery from 'jquery'
+
 import L from 'leaflet'
 import PolylineEncoded from 'polyline-encoded'
 import css from '../styles/map.less'
@@ -93,6 +93,7 @@ class Leaflet extends Component {
 
     render() {
         return (
+
             <div
                 id="map"
                 ref={(el) => {
