@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import Leaflet from '../components/Leaflet'
 
 import {getResults, goSearch} from '../actions/Search'
+import {routeSelection} from '../actions/Results'
 
 class Results extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class Results extends React.Component {
   render() {
     if(this.props.results){
         const list = this.props.results.routes.map((route,index)=>{
-            return (<li key={index}>
-                <R2Route route={route} results={this.props.results}/>
+            return (<li key={index} onClick={()=>{this.props.routeSelection(route)}}>
+                <R2Route route={route} results={this.props.results} />
               </li>)
         })
 
@@ -27,7 +28,7 @@ class Results extends React.Component {
               <ul>{list}</ul>
             </div>
             <div className="col col-md-8" classID="main-display">
-              <Leaflet />
+              <Leaflet route={this.props.selectedRoute} results={this.props.results}/>
             </div>
           </div>
         )
@@ -57,14 +58,16 @@ const mapStateToProps = (state, ownProps)=> {
         loading: state.searchReducer.loading, 
         params: ownProps.params,
         oPlace: state.searchReducer.oPlace,
-        dPlace: state.searchReducer.dPlace
+        dPlace: state.searchReducer.dPlace, 
+        selectedRoute: state.resultsReducer.selectedRoute
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getResults: getResults,
-    goSearch: goSearch
+    goSearch: goSearch,
+    routeSelection: routeSelection
   }, dispatch)
 };
 
