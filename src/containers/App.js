@@ -14,7 +14,7 @@ class App extends React.Component {
     let style = css.app + ' col-md-12'
 
     return (
-      <section className={style}>
+      <section className={style} id="app-section">
         {this.props.children}
       </section>
     );

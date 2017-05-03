@@ -9,6 +9,8 @@ import Leaflet from '../components/Leaflet'
 import {getResults, goSearch} from '../actions/Search'
 import {routeSelection} from '../actions/Results'
 
+import $ from 'jquery'
+
 class Results extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class Results extends React.Component {
             <div className="col col-md-4" id="sidebar">
               <ul>{list}</ul>
             </div>
-            <div className="col col-md-8" classID="main-display">
+            <div className="col col-md-8" id="main-display">
               <Leaflet route={this.props.selectedRoute} results={this.props.results}/>
             </div>
           </div>
@@ -37,6 +39,12 @@ class Results extends React.Component {
       const loader = this.props.loading ? <Loader />: null
       return (<div>{loader}</div>)
     } 
+  }
+
+  componentDidMount() {
+        $(window).on("resize.sidebar", function () { 
+            $("#sidebar").height($(window).height()-30); 
+       }).trigger("resize");
   }
 
   componentWillMount() {

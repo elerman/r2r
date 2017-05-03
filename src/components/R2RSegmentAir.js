@@ -1,5 +1,6 @@
 import React from 'react';
 import R2RAirleg from './R2RAirleg'
+import Icon from './Icon'
 
 class R2RSegmentAir extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class R2RSegmentAir extends React.Component {
 
     return (
         <div className="r2r-segment-air">
+            <Icon name="plane" />
             <p>Avg price: ${this.props.segment.indicativePrices[0].price}</p>
             {outbound}
         </div>

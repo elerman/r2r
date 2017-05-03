@@ -5,6 +5,7 @@ import PolylineEncoded from 'polyline-encoded'
 import css from '../styles/map.less'
 
 import _ from 'underscore'
+import $ from 'jquery'
 
 class Leaflet extends Component {
 
@@ -42,6 +43,7 @@ class Leaflet extends Component {
                 
                 if(!this.state.initialized){
                     this.setState({initialized: true, map: map})
+                    this.resizeHandler(map)
                 }
 
                 return map
@@ -81,6 +83,9 @@ class Leaflet extends Component {
                     this.layers = [orm,desm,polyline, ...this.layers]
                 }
             }
+            
+            //save coords to fit bounds on resize. we replace coords on every loadroute
+            this.coords = coords
             map.fitBounds(coords)
         }
 
@@ -89,6 +94,10 @@ class Leaflet extends Component {
         else 
             loadRoute(this.props.route)
 
+    }
+
+    componentWillUnmount() {
+        $(window).off('resize.map')
     }
 
     render() {
@@ -101,6 +110,18 @@ class Leaflet extends Component {
             }}
                 className={css.mapholder}></div>
         );
+    }
+
+    resizeHandler(map){
+
+        let self = this
+
+        $(window).on("resize.map", function () { 
+            $("#map").height($(window).height()-30); 
+            map.invalidateSize(); 
+            //on every resize also fit bounds if there are
+            if(self.coords) map.fitBounds(self.coords)
+        }).trigger("resize.map");
     }
 }
 
