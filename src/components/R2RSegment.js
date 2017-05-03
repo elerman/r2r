@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import R2RPlace from './R2RPlace'
 import R2RSegmentAir from './R2RSegmentAir'
 import R2RSegmentSurface from './R2RSegmentSurface'
+import Icon from './Icon'
 
 class R2RSegment extends Component {
 
@@ -17,7 +18,7 @@ class R2RSegment extends Component {
         
         return (
             <div className="r2r-segment">
-                <p>Kind: {this.props.segment.segmentKind}</p>
+                <p>Kind: {this.props.segment.segmentKind} <Icon name={this.props.segment.segmentKind} /></p>
                 <R2RPlace place={this.props.results.places[this.props.segment.depPlace]} />
                 <R2RPlace place={this.props.results.places[this.props.segment.arrPlace]} />
                 <p>Distance: {this.props.segment.distance} km</p>

@@ -10,10 +10,13 @@ import {getResults, goSearch} from '../actions/Search'
 import {routeSelection} from '../actions/Results'
 
 import $ from 'jquery'
+import _ from 'underscore'
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {sidebarResizeHandler: null}
   }
 
   render() {
@@ -36,15 +39,21 @@ class Results extends React.Component {
         )
         
     }else{
-      const loader = this.props.loading ? <Loader />: null
-      return (<div>{loader}</div>)
+      return <Loader />
     } 
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
+    if(this.props.results && !this.state.sidebarResizeHandler){
         $(window).on("resize.sidebar", function () { 
-            $("#sidebar").height($(window).height()-30); 
-       }).trigger("resize");
+              $("#sidebar").height($(window).height()-30); 
+        }).trigger("resize.sidebar");
+        this.setState({sidebarResizeHandler: 'resize.handler'})
+    }
+  }
+
+  componentWillUnmount() {
+    $(window).off(this.state.sidebarResizeHandler)
   }
 
   componentWillMount() {
