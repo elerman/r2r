@@ -18,7 +18,8 @@ class R2RSegment extends Component {
         
         return (
             <div className="r2r-segment">
-                <p>Kind: {this.props.segment.segmentKind} <Icon name={this.props.segment.segmentKind} /></p>
+                <p>Kind: {this.props.segment.segmentKind} <Icon name={this.props.results.vehicles[this.props.segment.vehicle].name.toLowerCase()} /></p>
+                <p>{this.props.segment.vehicle} {this.props.results.vehicles[this.props.segment.vehicle].name}</p>
                 <R2RPlace place={this.props.results.places[this.props.segment.depPlace]} />
                 <R2RPlace place={this.props.results.places[this.props.segment.arrPlace]} />
                 <p>Distance: {this.props.segment.distance} km</p>

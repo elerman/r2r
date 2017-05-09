@@ -29,10 +29,10 @@ class Results extends React.Component {
 
         return (
           <div className="row">
-            <div className="col col-md-4" id="sidebar">
+            <div className="col col-md-5" id="sidebar">
               <ul>{list}</ul>
             </div>
-            <div className="col col-md-8" id="main-display">
+            <div className="col col-md-7" id="main-display">
               <Leaflet route={this.props.selectedRoute} results={this.props.results}/>
             </div>
           </div>

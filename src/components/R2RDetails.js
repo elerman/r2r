@@ -12,7 +12,8 @@ class R2RDetails extends Component {
 
     toggleSegments(evt){
         evt.stopPropagation()
-        this.setState({segments: true})
+        let toggle = this.state.segments
+        this.setState({segments: !toggle })
     }
 
     render () {
@@ -21,12 +22,12 @@ class R2RDetails extends Component {
 
         return (
             <div className="r2r-details">
-                <div>Departure from: <R2RPlace place={this.props.results.places[this.props.route.depPlace]} /></div>
-                <div>Arriving at: <R2RPlace place={this.props.results.places[this.props.route.arrPlace]} /></div>
+                <div>From: <R2RPlace place={this.props.results.places[this.props.route.depPlace]} /></div>
+                <div>To: <R2RPlace place={this.props.results.places[this.props.route.arrPlace]} /></div>
                 <p>Distance: {this.props.route.distance} km</p>
-                <p>Total Duration (aprox.): {(this.props.route.totalDuration/60).toFixed(2)} hrs</p>
-                <p>Avg. price: ${this.props.route.indicativePrices[0].price}</p>
-                <button onClick={(evt)=>{this.toggleSegments(evt)}}>View Segments</button>
+                <p>Aprox. Duration: {(this.props.route.totalDuration/60).toFixed(2)} hrs</p>
+                <p>Avg. Price: ${this.props.route.indicativePrices[0].price}</p>
+                <button className="btn btn-sm" onClick={(evt)=>{this.toggleSegments(evt)}}>View Segments</button>
                 {segments}
             </div>
         )

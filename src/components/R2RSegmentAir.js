@@ -18,8 +18,7 @@ class R2RSegmentAir extends React.Component {
     return (
         <div className="r2r-segment-air">
             <Icon name="plane" />
-            <p>Avg price: ${this.props.segment.indicativePrices[0].price}</p>
-            {outbound}
+            <p>Avg ticket fare: ${this.props.segment.indicativePrices[0].price}</p>
         </div>
     )
   }

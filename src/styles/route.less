@@ -1,0 +1,31 @@
+@import "variables.less";
+
+:local(.r2rRoute){
+    //background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    //color: @blue;
+    transition: .5s all;
+    //box-shadow: -2px 1px 1px #8c8c8c;
+    cursor: pointer;
+
+    &:focus{
+        background: darken(@blue, 5%);
+    }
+
+    .route-price,.route-name{
+        font-weight: 300;
+    }
+
+    i{
+        font-size: 23px;
+        position: absolute;
+        margin-left: 14px;
+        margin-top: -1px;
+    }
+
+    .route-price{
+        float: right;
+        font-weight: 400;
+    }
+}

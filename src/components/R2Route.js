@@ -3,6 +3,8 @@ import R2RDetails from './R2RDetails'
 import Icon from './Icon'
 import {getIconName} from '../utils/main'
 
+import css from '../styles/route.less'
+
 class R2Route extends React.Component {
   constructor(props) {
     super(props);
@@ -18,10 +20,11 @@ class R2Route extends React.Component {
     const route = this.props.route
     const details = this.state.details? <R2RDetails route={route} results={this.props.results}/>:null
     return (
-        <div className="r2r-route">
-            <div onClick={(evt)=>{this.handleRouteLink(evt)}}>{route.name} <Icon name={getIconName(route.name)} />- ({this.props.results.currencyCode}{route.indicativePrices[0].priceLow} - {this.props.results.currencyCode}{route.indicativePrices[0].priceHigh})</div>
+        <section className={css.r2rRoute} onClick={(evt)=>{this.handleRouteLink(evt)}}>
+            <span className="route-name">{route.name}</span> <Icon name={getIconName(route.name)} />
+            <span className="route-price">{this.props.results.currencyCode} {route.indicativePrices[0].priceLow} - {route.indicativePrices[0].priceHigh}</span>
           {details}
-        </div>
+        </section>
     );
   }
 
